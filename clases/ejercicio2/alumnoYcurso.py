@@ -1,5 +1,6 @@
 
-
+#clases almuno curso y metodo menu
+#_________________ CLASES________________ 
 
 class Alumno:
     def __init__(self, nombre):
@@ -16,28 +17,39 @@ class Curso:
 
     def inscribir_alumno(self, alumno):
         if alumno in self.alumnos:
-            print(f"El alumno {alumno} ya está inscrito en el curso")
+            print(f" El alumno '{alumno}' ya está inscrito en el curso '{self.nombre}'.")
         else:
             self.alumnos.append(alumno)
-            print(f"Alumno {alumno} inscrito correctamente en el curso {self.nombre}")
+            print(f" Alumno '{alumno}' inscrito en el curso '{self.nombre}' correctamente.")
 
     def remover_alumno(self, alumno):
         if alumno in self.alumnos:
             self.alumnos.remove(alumno)
-            print(f"Alumno {alumno} removido del curso {self.nombre}")
+            print(f" Alumno '{alumno}' ha sido removido del curso '{self.nombre}'.")
         else:
-            print(f"El alumno {alumno} no está inscrito en el curso {self.nombre}")
+            print(f" No se puede remover: el alumno '{alumno}' no está inscrito en el curso '{self.nombre}'.")
 
     def listar_alumnos(self):
-        if not self.alumnos:
-            print("No hay alumnos inscritos en este curso")
+        if self.alumnos:
+            print(f"\n Alumnos inscritos en el curso '{self.nombre}':")
+            for alumno in self.alumnos:
+                print(f"  - {alumno}")
         else:
-            print(f"Alumnos inscritos en el curso '{self.nombre}':")
-            for i, alumno in enumerate(self.alumnos, start=1):
-                print(f"  {i}. {alumno}")
+            print(f"\n No hay alumnos inscritos en el curso '{self.nombre}'.")
 
-    def mostrar_estado(self):
-        print("\nEstado del curso:")
-        print(f"Nombre del curso: {self.nombre}")
-        print(f"Total de alumnos: {len(self.alumnos)}")
+    def estado_curso(self):
+        print(f"\n Estado actual del curso '{self.nombre}':")
         self.listar_alumnos()
+
+
+#_______________MENÚ_________________ 
+
+def menu():
+    print("\n INGRESO DE DATOS DE CURSOS Y ALUMNOS \n ")
+    print("1 Definir nuevo curso")
+    print("2 Registrar nuevo alumno e inscribirlo")
+    print("3 Remover alumno del curso")
+    print("4 Listar alumnos inscritos")
+    print("5 Consultar estado del curso")
+    print("6 Salir del Menu")
+    return input("\nSeleccione una opción: ")

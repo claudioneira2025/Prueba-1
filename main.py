@@ -4,8 +4,8 @@
 
 
 from clases.ejercicio1 import libroYbiblioteca
-#if __name__ == "__main__":
-biblioteca = libroYbiblioteca.Biblioteca()
+if __name__ == "__main__":
+        biblioteca = libroYbiblioteca.Biblioteca()
 
 
 while True:
@@ -55,8 +55,8 @@ while True:
 #Empiesa 2 ejercico
 from clases.ejercicio2 import alumnoYcurso
 
-
-curso_colegio = Curso("Básica")
+if __name__ == "__main__":
+        curso_colegio = Curso("Básica")
 
 a1 = Alumno("Ana")
 a2 = Alumno("Carlos")
@@ -176,7 +176,7 @@ if __name__ == "__main__":
 #Ejercicio 7 
         from clases.ejercicio7 import agendaYcontacto
 
-#if __name__ == "__main__":
+        #if __name__ == "__main__":
         agenda = Agenda()
 
         while True:
@@ -207,8 +207,8 @@ if __name__ == "__main__":
                         agenda.eliminar_contacto(nombre)
 
                 elif opcion == "5":
-                        print(" Saliendo del sistema de agenda. ¡Hasta luego!")
-                break
+                 print("Saliendo del sistema de agenda. ¡Hasta luego!")
+                 break
 
-        else:
-             print(" Opción no válida. Intente nuevamente")
+                else:
+                 print(" Opción no válida. Intente nuevamente")

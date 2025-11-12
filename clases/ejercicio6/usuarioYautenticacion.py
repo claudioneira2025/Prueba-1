@@ -1,67 +1,45 @@
 
-class SistemaAutenticacion:
+#ejercicio6 clases y metodo menu
+
+class Usuario:
+    def __init__(self, nombre_usuario, contraseña):
+        self.nombre_usuario = nombre_usuario
+        self.contraseña = contraseña
+
+
+class SistemaUsuarios:
     def __init__(self):
-        """Inicializa el sistema con un diccionario vacío de usuarios."""
         self.usuarios = {}
 
     def registrar_usuario(self, nombre_usuario, contraseña):
-        """Registra un nuevo usuario si no existe previamente."""
         if nombre_usuario in self.usuarios:
-            print(f"El nombre de usuario '{nombre_usuario}' ya está registrado.")
+            print(f" El usuario '{nombre_usuario}' ya está registrado.")
         else:
-            self.usuarios[nombre_usuario] = contraseña
+            self.usuarios[nombre_usuario] = Usuario(nombre_usuario, contraseña)
             print(f" Usuario '{nombre_usuario}' registrado correctamente.")
 
     def iniciar_sesion(self, nombre_usuario, contraseña):
-        "Valida las credenciales del usuario e inicia sesión si son correctas"
         if nombre_usuario not in self.usuarios:
-            print(f" El usuario '{nombre_usuario}' no existe.")
-        elif self.usuarios[nombre_usuario] != contraseña:
-            print(" Contraseña incorrecta. Acceso denegado.")
+            print(f" Usuario '{nombre_usuario}' no existe.")
+            return False
+        usuario = self.usuarios[nombre_usuario]
+        if usuario.contraseña == contraseña:
+            print(f" Acceso autorizado. ¡Bienvenido, {nombre_usuario}!")
+            return True
         else:
-            print(f" Bienvenido, {nombre_usuario}. Acceso autorizado.")
+            print(" Contraseña incorrecta.")
+            return False
 
-    def consultar_usuario(self, nombre_usuario):
-        "Consulta si un usuario está registrado"
-        if nombre_usuario in self.usuarios:
-            print(f" El usuario '{nombre_usuario}' está registrado.")
-        else:
-            print(f" El usuario '{nombre_usuario}' NO está registrado.")
-
-    def menu(self):
-        "Muestra el menú principal del sistema"
-        while True:
-            print("\n MENÚ PRINCIPAL \n")
-            print("1 Registrar nuevo usuario")
-            print("2 Iniciar sesión")
-            print("3 Consultar usuario")
-            print("4 Salir")
-            
-            opcion = input("Seleccione una opción (1-4): ")
-
-            if opcion == "1":
-                nombre = input("Ingrese nombre de usuario: ")
-                contraseña = input("Ingrese contraseña: ")
-                self.registrar_usuario(nombre, contraseña)
-
-            elif opcion == "2":
-                nombre = input("Ingrese nombre de usuario: ")
-                contraseña = input("Ingrese contraseña: ")
-                self.iniciar_sesion(nombre, contraseña)
-
-            elif opcion == "3":
-                nombre = input("Ingrese nombre de usuario: ")
-                self.consultar_usuario(nombre)
-
-            elif opcion == "4":
-                print(" Saliendo del sistema. ¡Hasta luego!")
-                break
-
-            else:
-                print(" Opción no válida. Intente nuevamente.")
+    def usuario_registrado(self, nombre_usuario):
+        return nombre_usuario in self.usuarios
 
 
-# Ejecutar el sistema
-if __name__ == "__main__":
-    sistema = SistemaAutenticacion()
-    sistema.menu()
+#__________Menu___________
+
+def menu():
+    print("\n SISTEMA DE AUTENTICACIÓN DE USUARIOS \n")
+    print("1- Registrar nuevo usuario")
+    print("2- Iniciar sesión")
+    print("3- Consultar si un usuario está registrado")
+    print("4- Salir")
+    return input("\n Seleccione una opción: ")

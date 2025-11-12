@@ -1,57 +1,59 @@
+#ejercicio7 clases y metodo menu
+
 class Contacto:
-    "Representa un contacto con nombre, teléfono y correo"
     def __init__(self, nombre, telefono, correo):
         self.nombre = nombre
         self.telefono = telefono
         self.correo = correo
 
-    def datos_contacto(self):
-        "Devuelve una representación legible del contacto"
-        return f" Nombre: {self.nombre} |  Teléfono: {self.telefono} |  Correo: {self.correo}"
+    def __str__(self):
+        return f"{self.nombre} - Tel: {self.telefono}, Correo: {self.correo}"
 
 
 class Agenda:
-    "Gestiona una lista de contactos"
     def __init__(self):
         self.contactos = []
 
-    def agregar_contacto(self, nombre, telefono, correo):
-        "Agrega un nuevo contacto a la agenda"
-        # Verificar si el contacto ya existe por nombre
-        for contacto in self.contactos:
-            if contacto.nombre.lower() == nombre.lower():
-                print(f" El contacto '{nombre}' ya existe en la agenda.")
-                return
-        nuevo = Contacto(nombre, telefono, correo)
-        self.contactos.append(nuevo)
-        print(f" Contacto '{nombre}' agregado correctamente.")
+    def agregar_contacto(self, contacto):
+        self.contactos.append(contacto)
+        print(f" Contacto '{contacto.nombre}' agregado a la agenda.")
 
     def mostrar_contactos(self):
-        "Muestra todos los contactos de la agenda"
-        if not self.contactos:
-            print(" La agenda está vacía.")
+        if self.contactos:
+            print("\n Lista de contactos:")
+            for i, contacto in enumerate(self.contactos, start=1):
+                print(f"{i}. {contacto}")
         else:
-            print("\n LISTADO DE CONTACTOS \n")
-            for contacto in self.contactos:
-                print(contacto)
+            print("\n La agenda está vacía.")
 
     def buscar_contacto(self, nombre):
-        """Busca un contacto por nombre."""
-        for contacto in self.contactos:
-            if contacto.nombre.lower() == nombre.lower():
-                print(" Contacto encontrado:")
-                print(contacto)
-                return
-        print(f" No se encontró ningún contacto con el nombre '{nombre}'.")
+        encontrados = [c for c in self.contactos if c.nombre.lower() == nombre.lower()]
+        if encontrados:
+            print("\n Contactos encontrados:")
+            for c in encontrados:
+                print(c)
+        else:
+            print(f" No se encontró ningún contacto con el nombre '{nombre}'.")
 
     def eliminar_contacto(self, nombre):
-        "Elimina un contacto por su nombre"
-        for contacto in self.contactos:
-            if contacto.nombre.lower() == nombre.lower():
-                self.contactos.remove(contacto)
-                print(f" Contacto '{nombre}' eliminado correctamente.")
-                return
-        print(f" No se encontró ningún contacto con el nombre '{nombre}'.")
+        encontrados = [c for c in self.contactos if c.nombre.lower() == nombre.lower()]
+        if encontrados:
+            for c in encontrados:
+                self.contactos.remove(c)
+            print(f" Contacto(s) '{nombre}' eliminado(s) de la agenda.")
+        else:
+            print(f" No se encontró ningún contacto con el nombre '{nombre}'.")
+
+#___________menu____________
+
+def menu():
+    print("\n   SISTEMA DE AGENDA   \n")
+    print("1- Agregar nuevo contacto")
+    print("2- Mostrar todos los contactos")
+    print("3- Buscar contacto por nombre")
+    print("4- Eliminar contacto por nombre")
+    print("5- Salir de Agenda")
+    return input("\n Seleccione una opción: ")
 
 
 
